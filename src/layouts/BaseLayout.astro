@@ -1,0 +1,132 @@
+---
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, url } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+}
+
+const { title, description, image = '/og-image.webp', imageAlt = 'Container terminal operations at the Port of Tema, Ghana' } = Astro.props;
+const pageTitle = title === site.name ? `${site.name} — ${site.slogan}` : `${title} | ${site.shortName}`;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+const path = Astro.url.pathname;
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  alternateName: site.shortName,
+  slogan: site.slogan,
+  url: site.url,
+  email: site.email,
+  telephone: site.phones.map((p) => p.tel),
+  foundingDate: '2013-07',
+  description: site.description,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Tema',
+    addressRegion: 'Greater Accra',
+    addressCountry: 'GH',
+  },
+  areaServed: { '@type': 'Country', name: 'Ghana' },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" sizes="32x32" href={url('/favicon-32.png')} />
+    <link rel="icon" type="image/png" sizes="192x192" href={url('/favicon-192.png')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <meta name="theme-color" content="#08152e" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={imageAlt} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} is:inline />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <Header currentPath={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      // Sticky header shadow + mobile menu + reveal animations.
+      (() => {
+        const header = document.querySelector('.site-header');
+        const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        const toggle = document.querySelector('.nav-toggle');
+        const menu = document.getElementById('mobile-nav');
+        if (toggle && menu) {
+          const setOpen = (open) => {
+            toggle.setAttribute('aria-expanded', String(open));
+            menu.classList.toggle('is-open', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+          };
+          toggle.addEventListener('click', () =>
+            setOpen(toggle.getAttribute('aria-expanded') !== 'true')
+          );
+          menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+              setOpen(false);
+              toggle.focus();
+            }
+          });
+        }
+
+        const year = document.querySelectorAll('[data-year]');
+        year.forEach((el) => (el.textContent = String(new Date().getFullYear())));
+
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const targets = document.querySelectorAll('[data-reveal]');
+        if (reduce || !('IntersectionObserver' in window)) {
+          targets.forEach((el) => el.classList.add('is-revealed'));
+        } else {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-revealed');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -40px' }
+          );
+          targets.forEach((el) => io.observe(el));
+        }
+      })();
+    </script>
+  </body>
+</html>

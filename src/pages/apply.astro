@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ApplyForm from '../components/ApplyForm.astro';
+import { site, url } from '../config/site';
+---
+
+<BaseLayout
+  title="Apply for Work"
+  description="Register your interest in working with GLCL — general labour, skilled work, equipment operator or supervisory roles in Tema, Ghana."
+>
+  <PageHero
+    eyebrow="Employment application"
+    title="Apply to work with GLCL"
+    lead="Complete the form below to register your interest. Fields marked with an asterisk are required — the rest are optional but help build a fuller picture."
+  />
+
+  <section class="section">
+    <div class="container apply-layout" style="display:grid;gap:2.5rem">
+      <div>
+        <ApplyForm />
+      </div>
+
+      <aside style="display:grid;gap:1.5rem;align-content:start" data-reveal>
+        <div class="panel panel--paper">
+          <h3>Before you apply</h3>
+          <ul class="checklist">
+            <li>Use a phone number you actually answer</li>
+            <li>Be honest about your experience — it is checked against real requirements</li>
+            <li>Do not send ID documents, bank details or sensitive personal information</li>
+            <li>Registration is free — report anyone asking for payment</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>Want to send a CV?</h3>
+          <p class="color-slate" style="font-size:var(--text-sm)">
+            This form does not accept file uploads. After applying, email your CV to the office
+            and mention that you have submitted an application.
+          </p>
+          <a class="btn btn--outline btn--block" href={`mailto:${site.email}?subject=${encodeURIComponent('CV — employment application')}`}>
+            Email your CV
+          </a>
+        </div>
+
+        <div class="panel">
+          <h3>Are you a business?</h3>
+          <p class="color-slate" style="font-size:var(--text-sm)">
+            This form is for people seeking work. Businesses requesting labour should use the
+            labour request form.
+          </p>
+          <a class="btn btn--outline btn--block" href={url('/request-labour/')}>Request Labour</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (min-width: 60rem) {
+    .apply-layout {
+      grid-template-columns: 1.6fr 1fr !important;
+    }
+  }
+</style>

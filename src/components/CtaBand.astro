@@ -1,0 +1,39 @@
+---
+import { url } from '../config/site';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+}
+
+const {
+  eyebrow = 'Get started',
+  title = 'Two ways to work with GLCL',
+  text = 'Businesses tell us what kind of workforce they need. People looking for work register their interest. Both start with a short form — or a phone call.',
+} = Astro.props;
+---
+
+<section class="cta-band">
+  <div class="container cta-band__inner">
+    <div data-reveal>
+      <p class="eyebrow eyebrow--light">{eyebrow}</p>
+      <h2>{title}</h2>
+      <p>{text}</p>
+    </div>
+    <div class="cta-paths" data-reveal>
+      <div class="cta-path">
+        <p class="cta-path__label">For businesses</p>
+        <h3>Request labour</h3>
+        <p>Describe the workers you need, where and when — we will discuss availability with you directly.</p>
+        <a class="btn btn--accent" href={url('/request-labour/')}>Request Labour</a>
+      </div>
+      <div class="cta-path">
+        <p class="cta-path__label">For job seekers</p>
+        <h3>Apply for work</h3>
+        <p>Register your interest in general, skilled, operator or supervisory work.</p>
+        <a class="btn btn--outline-light" href={url('/apply/')}>Apply for Work</a>
+      </div>
+    </div>
+  </div>
+</section>

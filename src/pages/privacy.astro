@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../config/site';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How GET Labour Company Limited handles information submitted through this website — labour requests, employment applications and general enquiries."
+>
+  <PageHero
+    variant="paper"
+    eyebrow="Legal"
+    title="Privacy policy"
+    lead="This policy explains what happens to information you submit through the GLCL website. It is a working draft written to match how this website actually operates."
+  />
+
+  <section class="section">
+    <div class="container container--narrow prose" data-reveal>
+      <div class="form-alert form-alert--info is-visible" role="note">
+        <span class="form-alert__icon" aria-hidden="true">i</span>
+        <div>
+          <p><strong>Draft status.</strong> This policy describes the actual data handling of
+          this website. Before publication it should be reviewed and approved by company
+          management, and by a qualified legal professional where required.</p>
+        </div>
+      </div>
+
+      <h2>1. Who we are</h2>
+      <p>
+        GET Labour Company Limited (“GLCL”, “we”) is a labour supply company based on Tema
+        Meridian Road, around Tema Community 2, Tema, Ghana. Contact for privacy questions:
+        <a href={`mailto:${site.email}`}>{site.email}</a> or
+        <a href={`tel:${site.phones[1].tel}`}>{site.phones[1].display}</a>.
+      </p>
+
+      <h2>2. Information we collect</h2>
+      <p>We collect only what you choose to submit through this website:</p>
+      <ul>
+        <li>
+          <strong>Labour request forms</strong> — contact name, company or organisation,
+          telephone number, email address, the labour category requested, work details you
+          describe, preferred contact method, and any optional information you add.
+        </li>
+        <li>
+          <strong>Employment application forms</strong> — name, telephone number, email
+          address (optional), preferred work category, skills and experience, certifications,
+          general location, personal statement, and your consent record.
+        </li>
+        <li>
+          <strong>General enquiry forms</strong> — name, email address, telephone number
+          (optional) and your message.
+        </li>
+      </ul>
+      <p>
+        We do not ask for national identification documents, bank details, dates of birth or
+        other sensitive personal information through this website, and we ask that you do not
+        submit them.
+      </p>
+
+      <h2>3. Why we collect it</h2>
+      <p>
+        Submitted information is used for one purpose only: to respond to you and to assess
+        and administer the request or application you made — for example, discussing a labour
+        requirement with your company, or considering your suitability for work when a
+        matching requirement arises.
+      </p>
+
+      <h2>4. How submissions are delivered</h2>
+      <p>
+        Forms on this website are delivered to GLCL by email using EmailJS
+        (<a href="https://www.emailjs.com/" target="_blank" rel="noopener noreferrer">emailjs.com</a>),
+        a third-party form-delivery service. When you submit a form, your entries are sent to
+        GLCL’s email inbox through that service. If delivery fails, the website offers you a
+        pre-filled email so you can send the same information yourself — your submission is
+        never silently discarded or falsely confirmed.
+      </p>
+      <p>
+        This website is hosted on GitHub Pages (<a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer">pages.github.com</a>).
+        Standard server logs (including IP addresses) may be recorded by the host for security
+        and operations purposes, under GitHub’s own privacy policy.
+      </p>
+
+      <h2>5. Who can see your information</h2>
+      <p>
+        Your submission is visible to GLCL staff who handle enquiries, labour requests and
+        employment applications. We do not sell personal information and we do not share it
+        for marketing. We do not publish applicant details on this website.
+      </p>
+
+      <h2>6. How long we keep it</h2>
+      <p>
+        Labour requests are kept as long as needed to handle the enquiry and any resulting
+        arrangement, and for a reasonable period afterwards for record-keeping. Application
+        details are kept while they remain relevant to potential placements. If you want your
+        details removed, email
+        <a href={`mailto:${site.email}`}>{site.email}</a> with your name and the phone number
+        you used, and we will delete them from our records.
+      </p>
+
+      <h2>7. Security</h2>
+      <p>
+        Submissions travel over encrypted HTTPS connections and arrive in GLCL’s email inbox.
+        Access is limited to staff who need it for their work. No internet system is
+        completely secure, so please avoid submitting sensitive personal information through
+        website forms in the first place.
+      </p>
+
+      <h2>8. Your rights</h2>
+      <p>
+        You may request access to the personal information we hold about you, ask us to correct
+        it, or ask us to delete it, by contacting the details above. We will respond to
+        reasonable requests as quickly as practical.
+      </p>
+
+      <h2>9. Changes to this policy</h2>
+      <p>
+        This policy may be updated when the website or its data handling changes. The latest
+        version is always published on this page.
+      </p>
+
+      <p class="field-hint" style="margin-top:2.5rem">
+        Last updated: October 2026 — drafted to match the live behaviour of this website
+        (form delivery via EmailJS, hosting on GitHub Pages).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

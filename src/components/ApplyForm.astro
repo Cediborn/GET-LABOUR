@@ -1,0 +1,160 @@
+---
+import { emailjs, site, applyCategories, equipmentTypes, url } from '../config/site';
+---
+
+<div class="form-panel">
+  <div class="form-alert" data-alert hidden></div>
+
+  <form
+    data-glcl-form="apply"
+    data-emailjs-public={emailjs.publicKey}
+    data-emailjs-service={emailjs.serviceId}
+    data-emailjs-template={emailjs.templateId}
+    data-company-email={site.email}
+    novalidate
+  >
+    <div class="form-grid form-grid--2">
+      <div class="field">
+        <label for="app-name">Full name <span class="req" aria-hidden="true">*</span></label>
+        <input id="app-name" name="fullname" type="text" autocomplete="name" required />
+        <p class="field-error">Please enter your full name.</p>
+      </div>
+
+      <div class="field">
+        <label for="app-phone">Telephone number <span class="req" aria-hidden="true">*</span></label>
+        <input id="app-phone" name="phone" type="tel" autocomplete="tel" required placeholder="0XX XXX XXXX" />
+        <p class="field-error">Please enter a telephone number we can reach you on.</p>
+      </div>
+
+      <div class="field">
+        <label for="app-email">Email address</label>
+        <input id="app-email" name="email" type="email" autocomplete="email" />
+        <p class="field-hint">Optional — but useful if you prefer email contact.</p>
+        <p class="field-error">Please enter a valid email address, or leave this blank.</p>
+      </div>
+
+      <div class="field">
+        <label for="app-location">General location <span class="req" aria-hidden="true">*</span></label>
+        <input id="app-location" name="location" type="text" required placeholder="e.g. Tema, Community 2" />
+        <p class="field-hint">Town or community — no need for a full address.</p>
+        <p class="field-error">Please tell us your general location.</p>
+      </div>
+
+      <div class="field field--full">
+        <label for="app-category">Preferred work category <span class="req" aria-hidden="true">*</span></label>
+        <select id="app-category" name="workCategory" required>
+          <option value="">Select the type of work you are interested in…</option>
+          {applyCategories.map((c) => <option value={c.label}>{c.label}</option>)}
+        </select>
+        <p class="field-error">Please choose a work category.</p>
+      </div>
+
+      <div class="field field--full conditional-group" data-when-work="Equipment operator">
+        <fieldset>
+          <legend>Equipment experience</legend>
+          <p class="field-hint" style="margin-bottom:.75rem">Tick the equipment you have experience with.</p>
+          <div class="checkbox-grid">
+            {equipmentTypes.map((eq) => (
+              <label class="checkbox">
+                <input type="checkbox" name="equipmentExperience" value={eq} />
+                {eq}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="field field--full">
+        <label for="app-skills">Relevant skills or work experience <span class="req" aria-hidden="true">*</span></label>
+        <textarea
+          id="app-skills"
+          name="skills"
+          required
+          placeholder="Describe the work you have done before. For general labour, a short honest summary is enough."></textarea>
+        <p class="field-error">Please briefly describe your experience.</p>
+      </div>
+
+      <div class="field field--full">
+        <label for="app-certs">Certifications or qualifications</label>
+        <textarea
+          id="app-certs"
+          name="certifications"
+          placeholder="Optional — e.g. operator certificate, training courses, SSSNIT details are NOT needed here"></textarea>
+        <p class="field-hint">Only include work-related training or certificates. Do not send ID or bank details.</p>
+      </div>
+
+      <div class="field field--full">
+        <label for="app-statement">Short personal statement</label>
+        <textarea
+          id="app-statement"
+          name="statement"
+          placeholder="Optional — anything else you would like GLCL to know about your availability or reliability"></textarea>
+      </div>
+
+      <div class="field field--full">
+        <label class="checkbox" for="app-consent">
+          <input id="app-consent" name="consent" type="checkbox" required />
+          <span>
+            I agree that GET Labour Company Limited may store and use the details I have provided
+            to assess my suitability for work, as described in the
+            <a href={url('/privacy/')}>privacy policy</a>. <span class="req" aria-hidden="true">*</span>
+          </span>
+        </label>
+        <p class="field-error">Please agree before submitting.</p>
+      </div>
+
+      <!-- Honeypot -->
+      <div class="honeypot" aria-hidden="true">
+        <label for="app-website">Website</label>
+        <input id="app-website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="field field--full">
+        <p class="form-notice">
+          CV upload is not available on this form. After submitting, you can email your CV to
+          <a href={`mailto:${site.email}`}>{site.email}</a>. Never send ID documents, bank details
+          or other sensitive information through website forms.
+        </p>
+      </div>
+
+      <div class="field field--full form-actions">
+        <button class="btn btn--accent btn--block" type="submit">Submit application</button>
+        <p class="field-hint text-center mb-0">
+          Submitting an application registers your interest. It does not guarantee employment.
+        </p>
+      </div>
+    </div>
+  </form>
+
+  <div class="form-success" data-success-for="apply">
+    <div class="form-success__badge" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2>Your application has been sent</h2>
+    <p>
+      Thank you — GLCL has received your application. Your details will be considered against
+      the company’s operational requirements. If a suitable assignment arises, the team will
+      contact you on the number you provided.
+    </p>
+    <p>
+      Remember: registering interest does not guarantee placement. Keep your phone reachable and
+      make sure your details stay up to date by submitting a new application if anything changes.
+    </p>
+    <a class="btn btn--outline" href={url('/apply/')} onclick="location.reload();return false;">Submit another application</a>
+  </div>
+</div>
+
+<script>
+  import '../scripts/forms.js';
+
+  const select = document.getElementById('app-category');
+  const groups = document.querySelectorAll('[data-when-work]');
+  const sync = () => {
+    groups.forEach((group) => {
+      const match = group.getAttribute('data-when-work') === select?.value;
+      group.classList.toggle('is-visible', Boolean(match));
+    });
+  };
+  select?.addEventListener('change', sync);
+  sync();
+</script>

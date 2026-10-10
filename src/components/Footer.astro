@@ -1,0 +1,94 @@
+---
+import { site, url, services, nav } from '../config/site';
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__top">
+    <div>
+      <a class="brand" href={url('/')} aria-label="GET Labour Company Limited — home">
+        <img class="brand__mark" src={url('/favicon-192.png')} alt="" width="44" height="44" />
+        <span class="brand__text">
+          <span class="brand__name">GET LABOUR</span>
+          <span class="brand__sub">Company Limited</span>
+        </span>
+      </a>
+      <p class="site-footer__blurb">
+        Maritime and industrial labour supply from the Tema Port enclave. Skilled labour,
+        general labour, equipment operators and supervisory support —
+        <em>Your Complete Labour Solution.</em>
+      </p>
+      <ul class="chip-list" aria-label="Social profiles">
+        {
+          site.social.map((s) => (
+            <li>
+              <a class="chip chip--dark" href={s.url} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2>Company</h2>
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={url(item.href)}>{item.label}</a>
+            </li>
+          ))
+        }
+        <li><a href={url('/request-labour/')}>Request Labour</a></li>
+        <li><a href={url('/apply/')}>Apply for Work</a></li>
+        <li><a href={url('/privacy/')}>Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Services</h2>
+      <ul>
+        {
+          services.map((s) => (
+            <li>
+              <a href={url(`/services/${s.slug}/`)}>{s.navTitle}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2>Contact</h2>
+      <ul class="site-footer__contact">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-top:3px;flex:none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.9.6 2.9.8a2 2 0 0 1 1.6 1.9z"/></svg>
+          <span>
+            <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].display}</a><br />
+            <a href={`tel:${site.phones[1].tel}`}>{site.phones[1].display}</a>
+          </span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-top:3px;flex:none"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg>
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-top:3px;flex:none"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>{site.address.line},<br />{site.address.city}, Ghana</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>
+      © <span data-year>2026</span> {site.name}. All rights reserved.
+    </p>
+    <p>
+      Port photography:
+      <a href="https://commons.wikimedia.org/wiki/File:Containerterminal_in_Tema,_Ghana.jpg" target="_blank" rel="noopener noreferrer">SteKrueBe</a>
+      (CC BY-SA 3.0) · Unsplash contributors · GLCL company photographs.
+    </p>
+  </div>
+</footer>

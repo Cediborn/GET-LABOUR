@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, url, type Service } from '../../config/site';
+
+import yardImg from '../../assets/img/container-yard-aerial.webp';
+import warehouseImg from '../../assets/img/warehouse-loading.webp';
+import forkliftImg from '../../assets/img/forklift-operations.webp';
+import vestsImg from '../../assets/img/supervisor-vests.webp';
+import vesselImg from '../../assets/img/vessel-at-sea.webp';
+import musterImg from '../../assets/img/labour-muster.webp';
+import craneImg from '../../assets/img/crane-lift.webp';
+import sacksImg from '../../assets/img/warehouse-sacks.webp';
+
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
+}
+
+const { service } = Astro.props as { service: Service };
+
+const heroImages: Record<string, ImageMetadata> = {
+  'skilled-labour': yardImg,
+  'general-labour': vesselImg,
+  'equipment-operators': forkliftImg,
+  supervision: vestsImg,
+};
+
+const gallery: Record<string, { img: ImageMetadata; alt: string; caption: string }[]> = {
+  'skilled-labour': [
+    { img: warehouseImg, alt: 'Workers loading cargo into a container inside a warehouse', caption: 'Skilled handling work in warehouse environments' },
+    { img: musterImg, alt: 'GLCL workers gathered at a muster point', caption: 'Allocated and organised before the shift' },
+    { img: sacksImg, alt: 'Stacked cargo sacks inside a warehouse', caption: 'Cargo and depot operations' },
+  ],
+  'general-labour': [
+    { img: warehouseImg, alt: 'Workers loading cargo into a shipping container', caption: 'Manual handling and cargo work' },
+    { img: musterImg, alt: 'Workers assembling before an assignment', caption: 'Gangs organised for each assignment' },
+    { img: sacksImg, alt: 'Warehouse stacked with cargo sacks', caption: 'Warehouse and depot manpower' },
+  ],
+  'equipment-operators': [
+    { img: forkliftImg, alt: 'A forklift loading cargo into a shipping container at a port', caption: 'Forklift operations' },
+    { img: craneImg, alt: 'A crane lifting a shipping container in a container yard', caption: 'Crane work in the yard' },
+    { img: yardImg, alt: 'Aerial view of a busy container yard', caption: 'Yard and stacking environments' },
+  ],
+  supervision: [
+    { img: vestsImg, alt: 'High-visibility vests printed with GET LABOUR SUPERVISOR', caption: 'GLCL supervisor identification on site' },
+    { img: musterImg, alt: 'A supervisor addressing gathered workers', caption: 'Coordinating allocated labour' },
+    { img: warehouseImg, alt: 'A team loading cargo under supervision', caption: 'Supervised cargo operations' },
+  ],
+};
+---
+
+<BaseLayout
+  title={service.title}
+  description={`GLCL ${service.title.toLowerCase()} — ${service.short} Request labour in Tema, Ghana.`}
+>
+  <PageHero
+    variant="image"
+    image={heroImages[service.slug]}
+    imageAlt=""
+    breadcrumbs={[
+      { label: 'Home', href: url('/') },
+      { label: 'Services', href: url('/services/') },
+      { label: service.navTitle },
+    ]}
+    eyebrow="Service"
+    title={service.title}
+    lead={service.short}
+  />
+
+  <section class="section">
+    <div class="container split split--text-first" style="align-items:start">
+      <div class="prose" data-reveal>
+        <h2 class="mt-0">What this service covers</h2>
+        <p class="color-slate">{service.intro}</p>
+        <h3>Typical operational requirements</h3>
+        <ul class="checklist">
+          {service.operations.map((op) => <li>{op}</li>)}
+        </ul>
+      </div>
+      <aside class="panel panel--amber" data-reveal>
+        <h3>When requesting this service</h3>
+        <p class="field-hint mb-4">Information that helps GLCL assess your requirement:</p>
+        <ul class="checklist">
+          {service.requestChecklist.map((item) => <li>{item}</li>)}
+        </ul>
+        <p style="margin-top:1.75rem">
+          <a class="btn btn--accent btn--block" href={url('/request-labour/')}>Request Labour</a>
+        </p>
+        <p class="field-hint text-center mb-0">
+          Or call <a href="tel:+233303961288">+233 30 396 1288</a>
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Worker categories</p>
+        <h2>Who we can provide</h2>
+      </div>
+      <div class="value-grid" data-reveal>
+        {
+          service.categories.map((cat) => (
+            <div class="value-card">
+              <h3>{cat.name}</h3>
+              <p>{cat.detail}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">In practice</p>
+        <h2>The environments our people work in</h2>
+      </div>
+      <div class="gallery-grid gallery-grid--3" data-reveal>
+        {
+          gallery[service.slug].map((item) => (
+            <figure>
+              <Image src={item.img} alt={item.alt} widths={[420, 700, 1000]} sizes="(min-width: 60rem) 33vw, 100vw" loading="lazy" />
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+      <p class="field-hint" style="margin-top:1.5rem">
+        Images illustrate the type of environments GLCL supplies labour to. They do not depict specific client contracts.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Next step"
+    title={`Request ${service.title.toLowerCase()} from GLCL`}
+    text="Send the details of your requirement and the team will discuss availability and arrangements with you directly."
+  />
+</BaseLayout>

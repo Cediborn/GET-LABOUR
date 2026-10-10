@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { url } from '../config/site';
+
+import musterImg from '../assets/img/labour-muster.webp';
+import { Image } from 'astro:assets';
+
+const categories = [
+  {
+    title: 'General labour',
+    text: 'Gang and individual work for onboard, ashore, transit and topside activities, plus warehouse, depot and site manpower. No advanced qualifications required — reliability and willingness to work matter most.',
+  },
+  {
+    title: 'Skilled labour',
+    text: 'Trade, driving and clerical roles such as drivers, tally clerks, record clerks and delivery clerks. Relevant experience or certification is valued for these roles.',
+  },
+  {
+    title: 'Equipment operators',
+    text: 'Forklift, reach stacker and crane operation. Experience with the specific equipment — and any certification you hold — will be part of the discussion.',
+  },
+  {
+    title: 'Supervisory & support roles',
+    text: 'Supervisors, foremen and support personnel who organise and account for allocated labour on site. Previous supervisory experience is typically required.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Register your interest',
+    text: 'Submit the application form with your details, preferred category and a short summary of your experience.',
+  },
+  {
+    title: 'Details reviewed',
+    text: 'The GLCL team reviews your profile against the categories of work the company supplies people for.',
+  },
+  {
+    title: 'Assignment matching',
+    text: 'When a client requirement matches your profile, the team contacts you about the specific assignment.',
+  },
+  {
+    title: 'Placement arranged',
+    text: 'If both sides agree, the arrangement — location, dates and working conditions — is confirmed directly with you.',
+  },
+];
+---
+
+<BaseLayout
+  title="Careers — Work with GLCL"
+  description="Register your interest in general labour, skilled work, equipment operation or supervisory roles with GET Labour Company Limited in Tema, Ghana."
+>
+  <PageHero
+    eyebrow="For job seekers"
+    title="Work with GLCL"
+    lead="GLCL supplies people to port, maritime, logistics and industrial operations around Tema. If you are looking for steady work — and you are ready when the call comes — register your interest with us."
+  />
+
+  <section class="section">
+    <div class="container split split--text-first">
+      <div class="prose" data-reveal>
+        <p class="eyebrow">How it works</p>
+        <h2>Register once, stay in the pool</h2>
+        <p class="color-slate">
+          Work through GLCL comes from client requirements — when a business needs people for
+          an operation, the team looks through registered candidates and contacts those who
+          fit. That means your details need to be accurate and your phone reachable.
+        </p>
+        <p class="color-slate">
+          <strong>Registering does not guarantee employment.</strong> Placement depends on
+          client demand, the type of work available at the time, and whether your profile suits
+          a specific assignment. Be wary of anyone asking you to pay money for placement — GLCL
+          does not charge workers to register.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--accent" href={url('/apply/')}>Apply for Work</a>
+          <a class="btn btn--outline" href="#categories">See work categories</a>
+        </div>
+      </div>
+      <figure class="media-frame" data-reveal style="margin:0">
+        <Image
+          src={musterImg}
+          alt="Workers gathering at a labour muster point before assignment"
+          widths={[520, 800, 1100]}
+          sizes="(min-width: 56rem) 50vw, 100vw"
+        />
+        <figcaption class="media-caption">Muster before assignment — GLCL labour operations</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="categories">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Categories of work</p>
+        <h2>What kind of work may be available</h2>
+        <p>
+          These are the categories GLCL supplies people for. Actual vacancies change with
+          client requirements — there are no fixed positions advertised on this page.
+        </p>
+      </div>
+      <div class="value-grid" data-reveal>
+        {
+          categories.map((c) => (
+            <div class="value-card">
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">The process</p>
+        <h2>From application to assignment</h2>
+      </div>
+      <ol class="steps" data-reveal style="list-style:none;padding:0;margin:0">
+        {
+          steps.map((s) => (
+            <li class="step">
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container container--narrow" data-reveal>
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Current vacancies</p>
+        <h2>No vacancies are advertised at this time</h2>
+        <p>
+          GLCL does not currently list specific job openings on this website. You are welcome
+          to register your interest — the team will contact registered people when matching
+          requirements come in.
+        </p>
+      </div>
+      <div class="panel panel--amber text-center">
+        <h3>Ready to register?</h3>
+        <p class="color-slate" style="font-size:var(--text-sm)">
+          The application takes a few minutes. You will need your phone number, your preferred
+          category of work and a short summary of your experience.
+        </p>
+        <a class="btn btn--accent" href={url('/apply/')}>Apply for Work</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Questions about applying?"
+    title="Talk to the GLCL team"
+    text="If you are unsure which category fits you, or you need help with the application, call the office and ask about employment registration."
+  />
+</BaseLayout>

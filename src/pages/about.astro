@@ -1,0 +1,183 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, url } from '../config/site';
+
+import teamImg from '../assets/img/glcl-team.webp';
+import musterImg from '../assets/img/labour-muster.webp';
+import vestsImg from '../assets/img/supervisor-vests.webp';
+---
+
+<BaseLayout
+  title="About GLCL"
+  description="GET Labour Company Limited (GLCL) is a Tema-based labour supply company founded in July 2013, providing skilled labour, general labour, equipment operators and supervision to maritime and industrial operations in Ghana."
+>
+  <PageHero
+    eyebrow="About the company"
+    title="A Tema labour company built around dependable workforce provision"
+    lead={`GET Labour Company Limited — known as GLCL — has supplied labour to businesses around Tema since ${site.founded}. This page explains who we are, where we work and how we operate.`}
+  />
+
+  <section class="section">
+    <div class="container split split--text-first">
+      <div class="prose" data-reveal>
+        <p class="eyebrow">Our story</p>
+        <h2>Established in the Tema Port enclave</h2>
+        <p class="color-slate">
+          GLCL was founded in {site.founded} with a clear purpose: to connect businesses that
+          need reliable labour with people looking for honest work. Since then, the company has
+          focused on the practical side of workforce supply — understanding what an operation
+          needs, matching workers to those needs and keeping the arrangement organised on the
+          ground.
+        </p>
+        <p class="color-slate">
+          The company is based on Tema Meridian Road, around Tema Community 2 — within easy
+          reach of the port, terminals, warehouses and industrial facilities that make up its
+          daily operating environment.
+        </p>
+        <h3>What GLCL does</h3>
+        <p class="color-slate">
+          GLCL supplies four categories of workforce: skilled labour, general (non-skilled)
+          labour, equipment operators, and supervisors and operational support personnel. These
+          cover onboard, ashore, transit and topside activities, as well as site, warehouse and
+          industrial work.
+        </p>
+        <p class="color-slate">
+          <a class="text-link" href={url('/services/')}>
+            See all services
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </p>
+      </div>
+      <figure class="media-frame" data-reveal style="margin:0">
+        <Image
+          src={teamImg}
+          alt="GLCL staff photographed together at the company’s Tema location"
+          widths={[560, 900, 1240]}
+          sizes="(min-width: 56rem) 50vw, 100vw"
+        />
+        <figcaption class="media-caption">GLCL staff — Tema, Ghana</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">How we work</p>
+        <h2>Professional workforce provision, handled properly</h2>
+      </div>
+      <div class="value-grid" data-reveal>
+        <div class="value-card">
+          <h3>Requirements first</h3>
+          <p>
+            Every placement starts with the client’s actual requirement — the role, the numbers,
+            the location and the working arrangements — so nothing is left to assumption.
+          </p>
+        </div>
+        <div class="value-card">
+          <h3>Worker vetting</h3>
+          <p>
+            Workers are assessed against the requirements of each assignment before allocation,
+            so clients receive people suited to the work being asked of them.
+          </p>
+        </div>
+        <div class="value-card">
+          <h3>Supervision on site</h3>
+          <p>
+            The company works with supervisors, foremen and support personnel who organise
+            allocated labour, keep records and coordinate with client site teams.
+          </p>
+        </div>
+        <div class="value-card">
+          <h3>Safe working practices</h3>
+          <p>
+            Attention to safe working practices is part of how GLCL operates, with a safety
+            officer within the company structure alongside operations and allocation roles.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split split--media-first">
+      <figure class="media-frame" data-reveal style="margin:0">
+        <Image
+          src={musterImg}
+          alt="Workers assembling at a GLCL muster point before an assignment"
+          widths={[520, 800, 1100]}
+          sizes="(min-width: 56rem) 50vw, 100vw"
+          loading="lazy"
+        />
+      </figure>
+      <div class="prose" data-reveal>
+        <p class="eyebrow">People and organisation</p>
+        <h2>Structured for operational work</h2>
+        <p class="color-slate">
+          Labour supply only works when allocation, supervision and administration are handled
+          properly. GLCL’s structure includes operations management, allocation roles,
+          supervisory staff and administrative support — the functions needed to organise
+          workers for port, maritime and industrial assignments.
+        </p>
+        <p class="color-slate">
+          For clients, this means a clear point of contact when workforce needs change. For
+          workers, it means assignments are organised, accounted for and supported by people
+          whose job is to keep operations running smoothly.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container container--narrow prose" data-reveal>
+      <p class="eyebrow">Company information</p>
+      <h2>The facts, at a glance</h2>
+      <dl class="info-rows">
+        <div class="info-row">
+          <dt>Registered name</dt>
+          <dd>GET Labour Company Limited (GLCL)</dd>
+        </div>
+        <div class="info-row">
+          <dt>Founded</dt>
+          <dd>{site.founded}</dd>
+        </div>
+        <div class="info-row">
+          <dt>Location</dt>
+          <dd>{site.address.line}, {site.address.city}, Ghana — {site.address.context.toLowerCase()}</dd>
+        </div>
+        <div class="info-row">
+          <dt>Sectors served</dt>
+          <dd>Maritime, port, logistics and industrial labour requirements</dd>
+        </div>
+        <div class="info-row">
+          <dt>Services</dt>
+          <dd>Skilled labour · General labour · Equipment operators · Supervision &amp; operational support</dd>
+        </div>
+        <div class="info-row">
+          <dt>Telephone</dt>
+          <dd>
+            <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].display}</a> ·
+            <a href={`tel:${site.phones[1].tel}`}>{site.phones[1].display}</a>
+          </dd>
+        </div>
+        <div class="info-row">
+          <dt>Email</dt>
+          <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+        </div>
+      </dl>
+      <p class="field-hint" style="margin-top:1.5rem">
+        Company registration details, certifications and formal credentials are available from
+        the company on request.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand
+    eyebrow="Work with GLCL"
+    title="Need people, or looking for work?"
+    text="GLCL serves two audiences every day: businesses that need reliable labour, and people who want steady work. Choose the path that fits you."
+  />
+</BaseLayout>

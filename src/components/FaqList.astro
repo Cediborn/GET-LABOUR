@@ -1,0 +1,16 @@
+---
+import { faqs, url } from '../config/site';
+---
+
+<div class="faq-list">
+  {
+    faqs.map((faq, i) => (
+      <details class="faq-item" open={i === 0}>
+        <summary>{faq.q}</summary>
+        <div class="faq-item__body">
+          <p>{faq.a}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>

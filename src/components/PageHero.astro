@@ -1,0 +1,41 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  variant?: 'dark' | 'paper' | 'image';
+  image?: ImageMetadata;
+  imageAlt?: string;
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const { eyebrow, title, lead, variant = 'dark', image, imageAlt = '', breadcrumbs } = Astro.props;
+---
+
+<section class:list={['page-hero', variant === 'paper' && 'page-hero--paper', variant === 'image' && 'page-hero--image']}>
+  {
+    variant === 'image' && image && (
+      <div class="page-hero__bg">
+        <img src={image.src} alt={imageAlt} width={image.width} height={image.height} fetchpriority="high" />
+      </div>
+    )
+  }
+  <div class="container page-hero__inner">
+    {
+      breadcrumbs && (
+        <nav aria-label="Breadcrumb">
+          <ol class="breadcrumbs">
+            {breadcrumbs.map((crumb) => (
+              <li>
+                {crumb.href ? <a href={crumb.href}>{crumb.label}</a> : crumb.label}
+              </li>
+            ))}
+          </ol>
+        </nav>
+      )
+    }
+    {eyebrow && <p class:list={['eyebrow', variant !== 'paper' && 'eyebrow--light']}>{eyebrow}</p>}
+    <h1>{title}</h1>
+    {lead && <p>{lead}</p>}
+  </div>
+</section>

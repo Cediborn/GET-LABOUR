@@ -1,0 +1,89 @@
+---
+import { nav, url } from '../config/site';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const isActive = (href: string) =>
+  href === '/' ? currentPath === '/' || currentPath === '/LA-MUSA/' : currentPath.includes(href);
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href={url('/')} aria-label="GET Labour Company Limited — home">
+      <img
+        class="brand__mark"
+        src={url('/favicon-192.png')}
+        alt=""
+        width="44"
+        height="44"
+      />
+      <span class="brand__text">
+        <span class="brand__name">GET LABOUR</span>
+        <span class="brand__sub">Company Limited</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Main">
+      <ul class="nav__list">
+        {
+          nav.map((item) => (
+            <li>
+              <a class="nav__link" href={url(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-apply" href={url('/apply/')}>Apply for Work</a>
+      <a class="btn btn--primary" href={url('/request-labour/')}>Request Labour</a>
+    </div>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open menu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav">
+    <div class="container">
+      <nav aria-label="Mobile">
+        <ul class="mobile-nav__list">
+          {
+            nav.map((item) => (
+              <li>
+                <a href={url(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a href={url('/apply/')} aria-current={isActive('/apply/') ? 'page' : undefined}>Apply for Work</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-nav__actions">
+        <a class="btn btn--accent btn--block" href={url('/request-labour/')}>Request Labour</a>
+        <a class="btn btn--outline-light btn--block" href={url('/apply/')}>Apply for Work</a>
+      </div>
+      <div class="mobile-nav__meta">
+        <p class="mb-0">Tema Meridian Road, Tema — Ghana<br />
+          <a href="tel:+233303961288">+233 30 396 1288</a> ·
+          <a href="tel:+233558007876">+233 55 800 7876</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</header>

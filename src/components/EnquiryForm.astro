@@ -1,0 +1,74 @@
+---
+import { emailjs, site, url } from '../config/site';
+---
+
+<div class="form-panel">
+  <div class="form-alert" data-alert hidden></div>
+
+  <form
+    data-glcl-form="enquiry"
+    data-emailjs-public={emailjs.publicKey}
+    data-emailjs-service={emailjs.serviceId}
+    data-emailjs-template={emailjs.templateId}
+    data-company-email={site.email}
+    novalidate
+  >
+    <div class="form-grid form-grid--2">
+      <div class="field">
+        <label for="enq-name">Your name <span class="req" aria-hidden="true">*</span></label>
+        <input id="enq-name" name="fullname" type="text" autocomplete="name" required />
+        <p class="field-error">Please enter your name.</p>
+      </div>
+
+      <div class="field">
+        <label for="enq-phone">Telephone</label>
+        <input id="enq-phone" name="phone" type="tel" autocomplete="tel" />
+      </div>
+
+      <div class="field field--full">
+        <label for="enq-email">Email address <span class="req" aria-hidden="true">*</span></label>
+        <input id="enq-email" name="email" type="email" autocomplete="email" required />
+        <p class="field-error">Please enter a valid email address.</p>
+      </div>
+
+      <div class="field field--full">
+        <label for="enq-message">Message <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="enq-message" name="message" required placeholder="How can we help?"></textarea>
+        <p class="field-error">Please enter your message.</p>
+      </div>
+
+      <div class="honeypot" aria-hidden="true">
+        <label for="enq-website">Website</label>
+        <input id="enq-website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="field field--full">
+        <p class="form-notice">
+          For labour requests use the
+          <a href={url('/request-labour/')}>labour request form</a>; for job applications use the
+          <a href={url('/apply/')}>application form</a> — they reach the right team faster.
+        </p>
+      </div>
+
+      <div class="field field--full form-actions">
+        <button class="btn btn--primary btn--block" type="submit">Send enquiry</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="form-success" data-success-for="enquiry">
+    <div class="form-success__badge" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2>Your message has been sent</h2>
+    <p>
+      Thank you — GLCL has received your enquiry. The team will get back to you using the
+      contact details you provided.
+    </p>
+    <a class="btn btn--outline" href={url('/contact/')} onclick="location.reload();return false;">Send another message</a>
+  </div>
+</div>
+
+<script>
+  import '../scripts/forms.js';
+</script>

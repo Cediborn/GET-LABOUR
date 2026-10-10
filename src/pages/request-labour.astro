@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import RequestForm from '../components/RequestForm.astro';
+import { site, url } from '../config/site';
+---
+
+<BaseLayout
+  title="Request Labour"
+  description="Request skilled labour, general labour gangs, equipment operators or supervisory support from GLCL in Tema, Ghana. Describe your requirement and the team will contact you directly."
+>
+  <PageHero
+    eyebrow="For businesses"
+    title="Request labour from GLCL"
+    lead="Tell us what your operation needs — the type of work, the number of people, where and when. The more detail you give, the better the team can assess your request."
+  />
+
+  <section class="section">
+    <div class="container" style="display:grid;gap:2.5rem;grid-template-columns:1fr">
+      <div style="display:grid;gap:2.5rem;grid-template-columns:1fr" class="request-layout">
+        <div>
+          <RequestForm />
+        </div>
+
+        <aside style="display:grid;gap:1.5rem;align-content:start" data-reveal>
+          <div class="panel panel--paper">
+            <h3>Prefer to speak to someone?</h3>
+            <p class="color-slate" style="font-size:var(--text-sm)">
+              Requests can also be made directly by phone or email. Have your requirement
+              details ready — type of work, numbers, location and dates.
+            </p>
+            <ul class="site-footer__contact" style="display:grid;gap:.75rem;list-style:none;padding:0;margin:0">
+              <li style="display:flex;gap:.6rem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy-800)" stroke-width="2" aria-hidden="true" style="margin-top:4px;flex:none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.9.6 2.9.8a2 2 0 0 1 1.6 1.9z"/></svg>
+                <span>
+                  <a href={`tel:${site.phones[0].tel}`}>{site.phones[0].display}</a><br />
+                  <a href={`tel:${site.phones[1].tel}`}>{site.phones[1].display}</a>
+                </span>
+              </li>
+              <li style="display:flex;gap:.6rem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy-800)" stroke-width="2" aria-hidden="true" style="margin-top:4px;flex:none"><path d="M4 4h16v16H4z"/><path d="m4 6 8 6 8-6"/></svg>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>What happens next</h3>
+            <ol class="checklist" style="list-style:none;padding:0">
+              <li>Your request reaches the GLCL operations team by email.</li>
+              <li>The team reviews the requirement against current availability.</li>
+              <li>GLCL contacts you to discuss details and confirm what is possible.</li>
+              <li>Any arrangement is confirmed directly between GLCL and your company.</li>
+            </ol>
+            <p class="field-hint mb-0" style="margin-top:1rem">
+              Each request is assessed individually. Submitting a request does not by itself
+              confirm that workers are available.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>Looking for work instead?</h3>
+            <p class="color-slate" style="font-size:var(--text-sm)">
+              This form is for businesses requesting labour. If you want to work with GLCL,
+              use the employment application.
+            </p>
+            <a class="btn btn--outline btn--block" href={url('/apply/')}>Apply for Work</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @media (min-width: 60rem) {
+    .request-layout {
+      grid-template-columns: 1.6fr 1fr !important;
+    }
+  }
+</style>
