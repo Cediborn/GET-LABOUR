@@ -1,0 +1,1 @@
+import"./EnquiryForm.astro_astro_type_script_index_0_lang.30CarWSS.js";const t=document.getElementById("app-category"),n=document.querySelectorAll("[data-when-work]"),o=()=>{n.forEach(e=>{const c=e.getAttribute("data-when-work")===t?.value;e.classList.toggle("is-visible",!!c)})};t?.addEventListener("change",o);o();
