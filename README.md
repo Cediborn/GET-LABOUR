@@ -39,6 +39,9 @@ npm run build      # static output in dist/
 - Live at: https://cediborn.github.io/LA-MUSA/ (GitHub Pages).
 - GitHub Pages serves the **built** site from the `gh-pages` branch (root path).
   The `main` branch holds the Astro source only.
+- **`.nojekyll` is required** at the root of `gh-pages`. Without it, GitHub Pages
+  runs Jekyll, which silently excludes any `_`-prefixed folder — so `_astro/`
+  (all CSS, JS, fonts, images) 404s and the site loads unstyled.
 - To redeploy after content/code changes:
 
   ```bash
