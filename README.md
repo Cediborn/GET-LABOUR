@@ -36,13 +36,20 @@ npm run build      # static output in dist/
 
 ## Deployment
 
-- Target: GitHub Pages at `https://cediborn.github.io/LA-MUSA/`.
+- Live at: https://cediborn.github.io/LA-MUSA/ (GitHub Pages).
+- GitHub Pages serves the **built** site from the `gh-pages` branch (root path).
+  The `main` branch holds the Astro source only.
+- To redeploy after content/code changes:
+
+  ```bash
+  npm run build
+  # copy dist output onto the gh-pages branch, e.g.:
+  npx gh-pages -d dist    # or a temp clone + orphan commit, as done manually
+  ```
+
 - `astro.config.mjs` sets `site: 'https://cediborn.github.io'` and `base: '/LA-MUSA'`
   — if the domain or repo changes, update both and the hardcoded absolute URLs in
   `src/components/EnquiryForm.astro`.
-- Build command: `npm run build`. Publish directory: `dist/`. Branch: `main`,
-  root path (no Actions workflow needed — Pages can build from branch or use the
-  prebuilt output; this repo is set to serve `dist` via branch settings or upload).
 - Sitemap: `dist/sitemap-index.xml` (registered via `robots.txt`).
 
 ## Forms / EmailJS
