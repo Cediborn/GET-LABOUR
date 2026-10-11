@@ -6,6 +6,10 @@ const dist = resolve('dist');
 const errors = [];
 const warnings = [];
 
+// Base path the checked build was produced with (see astro.config.mjs):
+// local builds use the GitHub Pages base, Vercel builds use the root ('').
+const BASE = (process.env.ASTRO_BASE ?? '/GET-LABOUR').replace(/\/$/, '');
+
 const walk = (dir) => {
   const out = [];
   for (const name of readdirSync(dir)) {
@@ -30,12 +34,12 @@ for (const page of pages) {
       continue;
     const clean = href.split('#')[0].split('?')[0];
     if (!clean) continue;
-    let target;
-    if (clean.startsWith('/LA-MUSA/')) target = join(dist, clean.replace('/LA-MUSA/', ''));
-    else {
-      errors.push(`${rel}: non-base-prefixed internal link "${href}"`);
+    const hasPrefix = BASE === '' ? clean.startsWith('/') : clean.startsWith(`${BASE}/`);
+    if (!hasPrefix) {
+      errors.push(`${rel}: non-base-prefixed internal link "${href}" (expected base "${BASE || '/'}")`);
       continue;
     }
+    const target = join(dist, clean.slice(BASE.length));
     // trailing slash -> index.html
     const asDir = join(target, 'index.html');
     if (clean.endsWith('/')) {
@@ -50,12 +54,12 @@ for (const page of pages) {
   for (const src of srcs) {
     if (src.startsWith('http') || src.startsWith('data:')) continue;
     const clean = src.split('?')[0];
-    let target;
-    if (clean.startsWith('/LA-MUSA/')) target = join(dist, clean.replace('/LA-MUSA/', ''));
-    else {
-      errors.push(`${rel}: non-base-prefixed asset "${src}"`);
+    const hasPrefix = BASE === '' ? clean.startsWith('/') : clean.startsWith(`${BASE}/`);
+    if (!hasPrefix) {
+      errors.push(`${rel}: non-base-prefixed asset "${src}" (expected base "${BASE || '/'}")`);
       continue;
     }
+    const target = join(dist, clean.slice(BASE.length));
     if (!existsSync(target)) errors.push(`${rel}: missing asset ${src}`);
   }
 

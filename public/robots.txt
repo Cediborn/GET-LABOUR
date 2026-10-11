@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://cediborn.github.io/LA-MUSA/sitemap-index.xml

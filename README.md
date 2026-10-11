@@ -10,11 +10,11 @@ Tema, Ghana. Built with Astro (static output). Two conversion journeys:
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321/LA-MUSA/
+npm run dev        # http://localhost:4321/GET-LABOUR/
 npm run build      # static output in dist/
 ```
 
-`npm run preview` serves the built site on port 4321 with the `/LA-MUSA/` base path.
+`npm run preview` serves the built site on port 4321 with the `/GET-LABOUR/` base path.
 
 ## Structure
 
@@ -36,24 +36,32 @@ npm run build      # static output in dist/
 
 ## Deployment
 
-- Live at: https://cediborn.github.io/LA-MUSA/ (GitHub Pages).
-- GitHub Pages serves the **built** site from the `gh-pages` branch (root path).
-  The `main` branch holds the Astro source only.
+Two hosts, one codebase — the base path is chosen automatically at build time by
+`astro.config.mjs`:
+
+| Host | Base path | Live URL |
+|---|---|---|
+| Vercel (`VERCEL` env set) | root (`/`) | https://get-labour.vercel.app/ |
+| GitHub Pages | `/GET-LABOUR` | https://cediborn.github.io/GET-LABOUR/ |
+
+- **Vercel**: deploys automatically from the `main` branch (Vercel runs
+  `npm run build`; no config needed — the site is fully static, output `dist/`).
+  Canonical/OG/sitemap URLs use `VERCEL_PROJECT_PRODUCTION_URL`, so a custom
+  domain added later is picked up without code changes.
+- **GitHub Pages**: serves the **built** site from the `gh-pages` branch. The
+  `main` branch holds the Astro source only. Redeploy:
+
+  ```bash
+  npm run build                          # builds with base /GET-LABOUR
+  # copy dist/* onto the gh-pages branch (temp clone + commit), then push
+  ```
+
 - **`.nojekyll` is required** at the root of `gh-pages`. Without it, GitHub Pages
   runs Jekyll, which silently excludes any `_`-prefixed folder — so `_astro/`
   (all CSS, JS, fonts, images) 404s and the site loads unstyled.
-- To redeploy after content/code changes:
-
-  ```bash
-  npm run build
-  # copy dist output onto the gh-pages branch, e.g.:
-  npx gh-pages -d dist    # or a temp clone + orphan commit, as done manually
-  ```
-
-- `astro.config.mjs` sets `site: 'https://cediborn.github.io'` and `base: '/LA-MUSA'`
-  — if the domain or repo changes, update both and the hardcoded absolute URLs in
-  `src/components/EnquiryForm.astro`.
-- Sitemap: `dist/sitemap-index.xml` (registered via `robots.txt`).
+- `robots.txt` is generated per host by `src/pages/robots.txt.ts` so the
+  sitemap URL always matches the deployment.
+- Sitemap: `dist/sitemap-index.xml`.
 
 ## Forms / EmailJS
 

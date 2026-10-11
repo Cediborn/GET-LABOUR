@@ -26,7 +26,6 @@ export const site = {
     { label: 'X (Twitter)', url: 'https://x.com/glcl62025' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/getlabour-2025i' },
   ],
-  url: 'https://cediborn.github.io/LA-MUSA',
 } as const;
 
 /** Relative path helper that respects the GitHub Pages base path. */

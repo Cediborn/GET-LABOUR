@@ -5,7 +5,7 @@ import { chromium } from 'playwright-core';
 const EDGE =
   process.env.EDGE_PATH ||
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
-const base = 'http://localhost:4321/LA-MUSA';
+const base = 'http://localhost:4321/GET-LABOUR';
 
 const browser = await chromium.launch({ executablePath: EDGE, headless: true });
 const results = [];

@@ -6,7 +6,7 @@ const EDGE =
   process.env.EDGE_PATH ||
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 
-const base = 'http://localhost:4321/LA-MUSA';
+const base = 'http://localhost:4321/GET-LABOUR';
 const shots = [
   { name: 'home-01-hero', url: `${base}/`, w: 1440, h: 900 },
   { name: 'home-02-intro', url: `${base}/`, w: 1440, h: 900, scroll: 900 },

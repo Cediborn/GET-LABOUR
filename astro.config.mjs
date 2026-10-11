@@ -2,10 +2,16 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Deployed as a GitHub Pages project site at https://cediborn.github.io/LA-MUSA/
+// One codebase, two deployment targets:
+// - Vercel: served from the domain root (process.env.VERCEL is set during build).
+// - GitHub Pages: project site under /GET-LABOUR (local builds for gh-pages).
+const onVercel = !!process.env.VERCEL;
+
 export default defineConfig({
-  site: 'https://cediborn.github.io',
-  base: '/LA-MUSA',
+  site: onVercel
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL ?? 'get-labour.vercel.app'}`
+    : 'https://cediborn.github.io',
+  ...(onVercel ? {} : { base: '/GET-LABOUR' }),
   trailingSlash: 'always',
   integrations: [sitemap()],
   compressHTML: true,
