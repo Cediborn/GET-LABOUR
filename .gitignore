@@ -7,3 +7,4 @@ shots/
 npm-debug.log*
 .env
 .env.*
+preview.log
