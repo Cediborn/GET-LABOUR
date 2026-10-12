@@ -3,21 +3,22 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site, url } from '../config/site';
+import { site, url, coreValues, history } from '../config/site';
 
 import teamImg from '../assets/img/glcl-team.webp';
 import musterImg from '../assets/img/labour-muster.webp';
 import vestsImg from '../assets/img/supervisor-vests.webp';
+import warehouseImg from '../assets/img/warehouse-loading.webp';
 ---
 
 <BaseLayout
   title="About GLCL"
-  description="GET Labour Company Limited (GLCL) is a Tema-based labour supply company founded in July 2013, providing skilled labour, general labour, equipment operators and supervision to maritime and industrial operations in Ghana."
+  description="GET Labour Company Limited (GLCL) is a Tema-based labour supply company providing skilled labour, general labour, equipment operators and supervision to maritime and industrial operations in Ghana."
 >
   <PageHero
     eyebrow="About the company"
     title="A Tema labour company built around dependable workforce provision"
-    lead={`GET Labour Company Limited — known as GLCL — has supplied labour to businesses around Tema since ${site.founded}. This page explains who we are, where we work and how we operate.`}
+    lead="GET Labour Company Limited — known as GLCL — supplies labour to businesses around Tema. This page explains who we are, the mission and values recorded in our company documents, and how we operate."
   />
 
   <section class="section">
@@ -26,11 +27,16 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
         <p class="eyebrow">Our story</p>
         <h2>Established in the Tema Port enclave</h2>
         <p class="color-slate">
-          GLCL was founded in {site.founded} with a clear purpose: to connect businesses that
-          need reliable labour with people looking for honest work. Since then, the company has
-          focused on the practical side of workforce supply — understanding what an operation
-          needs, matching workers to those needs and keeping the arrangement organised on the
-          ground.
+          GLCL was set up to connect businesses that need reliable labour with people looking
+          for honest work. Company records place the company’s founding in {history.recordedFounding}.
+          The company has focused on the practical side of workforce supply — understanding
+          what an operation needs, matching workers to those needs and keeping the arrangement
+          organised on the ground.
+        </p>
+        <p class="color-slate">
+          {history.earlierReference} The company’s historical business plan describes the
+          development of labour supply operations around these ports, and the wider industrial
+          environment of Ghana.
         </p>
         <p class="color-slate">
           The company is based on Tema Meridian Road, around Tema Community 2 — within easy
@@ -42,7 +48,8 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
           GLCL supplies four categories of workforce: skilled labour, general (non-skilled)
           labour, equipment operators, and supervisors and operational support personnel. These
           cover onboard, ashore, transit and topside activities, as well as site, warehouse and
-          industrial work.
+          industrial work. Recruitment and workforce preparation sit at the centre of the
+          business: finding the right people and preparing them for the work.
         </p>
         <p class="color-slate">
           <a class="text-link" href={url('/services/')}>
@@ -63,7 +70,39 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
     </div>
   </section>
 
+  <!-- Mission, vision and values -->
   <section class="section section--paper">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Mission &amp; vision</p>
+        <h2>What the company was built to do</h2>
+        <p>
+          Taken from the company’s own business documents — the standard GLCL sets for its
+          labour supply and service delivery.
+        </p>
+      </div>
+      <div class="value-grid" data-reveal>
+        <div class="value-card">
+          <h3>Mission</h3>
+          <p>{site.mission}</p>
+        </div>
+        <div class="value-card">
+          <h3>Vision</h3>
+          <p>“{site.vision}”</p>
+        </div>
+      </div>
+      <div class="panel panel--amber" data-reveal style="margin-top:var(--space-5)">
+        <h3>Core values</h3>
+        <ul class="checklist">
+          {coreValues.map((v) => (
+            <li><strong>{v.title}</strong> — {v.text}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
       <div class="section-head" data-reveal>
         <p class="eyebrow">How we work</p>
@@ -102,7 +141,7 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
     </div>
   </section>
 
-  <section class="section">
+  <section class="section section--paper">
     <div class="container split split--media-first">
       <figure class="media-frame" data-reveal style="margin:0">
         <Image
@@ -131,7 +170,65 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
     </div>
   </section>
 
+  <!-- Workforce development -->
+  <section class="section">
+    <div class="container split split--text-first">
+      <div class="prose" data-reveal>
+        <p class="eyebrow">Workforce development</p>
+        <h2>Training and retraining, before placement</h2>
+        <p class="color-slate">
+          The company’s business documents describe recruiting workers and preparing them for
+          employment: training and retraining skilled and unskilled people so they can handle
+          equipment and modern working methods on the job. This preparation is what turns a
+          pool of workers into a workforce an operation can rely on.
+        </p>
+        <p class="color-slate">
+          Whether specific training arrangements are available now depends on current
+          requirements — the office can confirm what the company offers today.
+        </p>
+      </div>
+      <figure class="media-frame" data-reveal style="margin:0">
+        <Image
+          src={warehouseImg}
+          alt="Workers loading cargo in a warehouse operation"
+          widths={[520, 800, 1100]}
+          sizes="(min-width: 56rem) 50vw, 100vw"
+          loading="lazy"
+        />
+        <figcaption class="media-caption">Prepared workers, real operations</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Worker welfare -->
   <section class="section section--paper">
+    <div class="container container--narrow" data-reveal>
+      <div class="section-head section-head--center">
+        <p class="eyebrow">Worker welfare</p>
+        <h2>Responsible labour supply, on both sides</h2>
+        <p>
+          Protecting workers against the injuries and health risks of employment is one of the
+          documented objectives of the company. How that objective is met in practice on any
+          assignment depends on the client’s site, the nature of the work and the arrangements
+          agreed for that operation.
+        </p>
+      </div>
+      <div class="panel panel--amber">
+        <ul class="checklist">
+          <li>Assignments are organised with site safety requirements and supervision in mind</li>
+          <li>Workers are matched to the requirements of the operation before allocation</li>
+          <li>Client site rules, inductions and PPE requirements are part of the arrangement</li>
+          <li>Welfare-related questions can be raised with the GLCL office directly</li>
+        </ul>
+      </div>
+      <p class="field-hint text-center" style="margin-top:1.5rem">
+        Specific employment conditions, benefits and protective arrangements are confirmed
+        per assignment between GLCL, the client and the worker.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container container--narrow prose" data-reveal>
       <p class="eyebrow">Company information</p>
       <h2>The facts, at a glance</h2>
@@ -141,8 +238,8 @@ import vestsImg from '../assets/img/supervisor-vests.webp';
           <dd>GET Labour Company Limited (GLCL)</dd>
         </div>
         <div class="info-row">
-          <dt>Founded</dt>
-          <dd>{site.founded}</dd>
+          <dt>Founding</dt>
+          <dd>Recorded in company documents as {history.recordedFounding}</dd>
         </div>
         <div class="info-row">
           <dt>Location</dt>

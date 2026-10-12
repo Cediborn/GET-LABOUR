@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CtaBand from '../components/CtaBand.astro';
 import FaqList from '../components/FaqList.astro';
-import { site, url, services } from '../config/site';
+import { site, url, services, coreValues } from '../config/site';
 
 import heroImg from '../assets/img/hero-tema-terminal.webp';
 import teamImg from '../assets/img/glcl-team.webp';
@@ -48,7 +48,7 @@ const values = [
 
 <BaseLayout
   title={site.name}
-  description="GLCL supplies skilled labour, general labour, equipment operators and supervisory support to maritime, port, logistics and industrial operations in Ghana. Based in the Tema Port enclave since 2013."
+  description="GLCL supplies skilled labour, general labour, equipment operators and supervisory support to maritime, port, logistics and industrial operations in Ghana. A Tema-based labour supply company."
 >
   <!-- Hero -->
   <section class="hero">
@@ -80,8 +80,8 @@ const values = [
     <div class="hero__strip">
       <dl class="container hero__strip-grid">
         <div class="hero__strip-item">
-          <dt>Established</dt>
-          <dd>{site.founded}</dd>
+          <dt>Founding</dt>
+          <dd>Recorded as {site.founded}</dd>
         </div>
         <div class="hero__strip-item">
           <dt>Location</dt>
@@ -106,10 +106,10 @@ const values = [
         <p class="eyebrow">Who we are</p>
         <h2>The workforce behind everyday port and industrial operations</h2>
         <p class="color-slate">
-          Founded in {site.founded}, GLCL connects businesses with reliable labour across the
-          maritime, port, logistics and industrial environment around Tema. Companies come to
-          us when they need people — skilled tradespeople, working gangs, machine operators or
-          supervisors — organised, vetted and ready for the job.
+          GLCL connects businesses with reliable labour across the maritime, port, logistics and
+          industrial environment around Tema. Companies come to us when they need people —
+          skilled tradespeople, working gangs, machine operators or supervisors — organised,
+          vetted and ready for the job.
         </p>
         <p class="color-slate">
           We keep the process straightforward: tell us what you need, discuss the details with
@@ -124,6 +124,34 @@ const values = [
         <Image src={teamImg} alt="The GLCL team at the company’s Tema premises" widths={[640, 900, 1240]} sizes="(min-width: 56rem) 50vw, 100vw" />
         <figcaption class="media-caption">The GLCL team — Tema, Ghana</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Mission, vision and core values -->
+  <section class="section section--paper">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">What guides us</p>
+        <h2>The mission, the standard, the values</h2>
+      </div>
+      <div class="value-grid" data-reveal style="margin-bottom:var(--space-5)">
+        <div class="value-card">
+          <h3>Mission</h3>
+          <p>{site.mission}</p>
+        </div>
+        <div class="value-card">
+          <h3>Vision</h3>
+          <p>“{site.vision}”</p>
+        </div>
+      </div>
+      <div class="panel panel--amber" data-reveal>
+        <h3>Core values</h3>
+        <ul class="checklist">
+          {coreValues.map((v) => (
+            <li><strong>{v.title}</strong> — {v.text}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -228,6 +256,42 @@ const values = [
       <p class="field-hint mt-0" data-reveal style="margin-top:1.5rem">
         Every request is assessed individually — availability depends on the requirement and operational circumstances at the time.
       </p>
+    </div>
+  </section>
+
+  <!-- Workforce development & worker welfare -->
+  <section class="section">
+    <div class="container split split--text-first">
+      <div data-reveal>
+        <p class="eyebrow">Development &amp; responsibility</p>
+        <h2>A workforce that is prepared — and protected</h2>
+        <p class="color-slate">
+          The company’s records describe training and retraining as core activities: building
+          workers’ capacity to handle equipment and modern working methods before they are
+          placed on operations. Contact the office to confirm what training arrangements are
+          currently available.
+        </p>
+        <p class="color-slate">
+          Protecting workers against the injuries and health risks of employment is a
+          documented company objective. Allocations are organised with site safety
+          requirements and supervision in mind — responsible labour supply, on both sides of
+          the assignment.
+        </p>
+        <a class="text-link" href={url('/about/')}>
+          How GLCL works
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+      <figure class="media-frame" data-reveal style="margin:0">
+        <Image
+          src={vestsImg}
+          alt="GLCL supervisors in high-visibility vests coordinating a work site"
+          widths={[520, 800, 1100]}
+          sizes="(min-width: 56rem) 50vw, 100vw"
+          loading="lazy"
+        />
+        <figcaption class="media-caption">Supervision and safe working practices on site</figcaption>
+      </figure>
     </div>
   </section>
 

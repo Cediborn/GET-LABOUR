@@ -26,6 +26,71 @@ export const site = {
     { label: 'X (Twitter)', url: 'https://x.com/glcl62025' },
     { label: 'LinkedIn', url: 'https://www.linkedin.com/in/getlabour-2025i' },
   ],
+  /**
+   * Documented mission and vision — taken from the company's historical
+   * business plan. Wording is preserved in meaning; see docs/GLCL-MANAGEMENT-VERIFICATION.md
+   * for the open questions around company history and current scope.
+   */
+  vision: 'Excellence in labour supply and service delivery.',
+  mission:
+    'To recruit and prepare skilled and unskilled workers for employment — particularly at the Tema and Takoradi ports and in the wider industrial environment — through reliable labour supply, training and retraining.',
+} as const;
+
+/** The five core values documented in the company's business plan. */
+export const coreValues = [
+  {
+    title: 'Endurance',
+    text: 'The stamina to keep performing through the demands of real port and industrial work.',
+  },
+  {
+    title: 'Reliability',
+    text: 'Dependable labour supply — workers and service delivery that clients can count on.',
+  },
+  {
+    title: 'Punctuality',
+    text: 'Respect for schedules, reporting times and the operational requirements of every assignment.',
+  },
+  {
+    title: 'Honesty',
+    text: 'Straightforward dealing with clients and workers alike, with no room for surprises.',
+  },
+  {
+    title: 'Customer friendliness',
+    text: 'Professional, approachable service — from the first enquiry through to allocation on site.',
+  },
+] as const;
+
+/**
+ * Business activities documented in the company's historical records.
+ * Current commercial availability is confirmed on request — see the
+ * management verification checklist.
+ */
+export const documentedActivities = [
+  {
+    title: 'Recruitment & workforce preparation',
+    text: 'The company’s documents describe recruiting workers and preparing them for employment — screening, matching people to operational requirements and organising placements with client teams.',
+  },
+  {
+    title: 'Training & capacity building',
+    text: 'Training and retraining of skilled and unskilled workers is a documented business activity, aimed at building the capacity to handle equipment and modern working methods. Contact the office to confirm current training arrangements.',
+  },
+  {
+    title: 'Operational support',
+    text: 'Historical company records also describe wider operational support functions — coordination, supervision and related site services. Availability depends on the requirement; discuss your needs with the team.',
+  },
+] as const;
+
+/**
+ * Company history as recorded in available documents.
+ * The 2011 and 2013 dates conflict in significance and have NOT been
+ * reconciled — management must confirm before a definitive timeline is published.
+ */
+export const history = {
+  recordedFounding: 'July 2013',
+  earlierReference:
+    'An earlier company document, dated 4 April 2011, references a licence application to operate as a labour supply company at Tema, Takoradi and other industries in the West African sub-region.',
+  context:
+    'The company’s historical business plan describes port privatisation, private stevedoring and the development of labour supply operations around the Tema and Takoradi ports.',
 } as const;
 
 /** Relative path helper that respects the GitHub Pages base path. */
@@ -77,6 +142,10 @@ export const services: Service[] = [
       {
         name: 'Tally clerks',
         detail: 'Cargo tallying, counting and documentation support on site.',
+      },
+      {
+        name: 'Waybill clerks',
+        detail: 'Waybill checking, handling and cargo documentation support.',
       },
       {
         name: 'Record clerks',
@@ -216,6 +285,14 @@ export const services: Service[] = [
         name: 'Operational support staff',
         detail: 'Personnel supporting allocation, documentation and day-to-day coordination.',
       },
+      {
+        name: 'Security personnel',
+        detail: 'Security staff for site and operational requirements, subject to current availability.',
+      },
+      {
+        name: 'Cleaners & janitorial personnel',
+        detail: 'Cleaning and janitorial staff for facilities and work areas, subject to current availability.',
+      },
     ],
     operations: [
       'Gang supervision on vessels and ashore',
@@ -249,6 +326,7 @@ export const skilledRoles = [
   'Reach stacker operators',
   'Crane operators',
   'Tally clerks',
+  'Waybill clerks',
   'Record clerks',
   'Delivery clerks',
   'Foremen',
@@ -292,6 +370,14 @@ export const faqs = [
   {
     q: 'Does submitting an application guarantee employment?',
     a: 'No. Placement depends on the company’s operational requirements at the time, client demand and whether your profile suits a specific assignment. Registering your interest keeps your details available for suitable opportunities.',
+  },
+  {
+    q: 'Where does GLCL operate?',
+    a: 'GLCL is based on Tema Meridian Road, around Tema Community 2 — within the Tema Port enclave. The company’s historical documents also reference operations around the Tema and Takoradi ports and related industrial environments. Contact the office to confirm coverage for your location.',
+  },
+  {
+    q: 'Does GLCL provide training?',
+    a: 'Training and retraining of workers is a documented business activity of the company, aimed at preparing people for operational work. Contact the office to confirm what training arrangements are currently available.',
   },
   {
     q: 'Where is GLCL located?',

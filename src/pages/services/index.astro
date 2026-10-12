@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { services, url } from '../../config/site';
+import { services, url, documentedActivities } from '../../config/site';
 
 import yardImg from '../../assets/img/container-yard-aerial.webp';
 import warehouseImg from '../../assets/img/warehouse-loading.webp';
@@ -25,7 +25,7 @@ const serviceImages: Record<string, ImageMetadata> = {
   <PageHero
     eyebrow="Services"
     title="Workforce categories for real operational requirements"
-    lead="GLCL supplies four categories of labour to businesses around Tema and Ghana’s industrial environment. Each can be requested with the specifics of your operation — numbers, location, timing and required experience."
+    lead="GLCL supplies four categories of labour to businesses around Tema and Ghana’s industrial environment — subject to current availability. Each can be requested with the specifics of your operation: numbers, location, timing and required experience."
   />
 
   <section class="section">
@@ -68,6 +68,33 @@ const serviceImages: Record<string, ImageMetadata> = {
   </section>
 
   <section class="section section--paper">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Beyond labour supply</p>
+        <h2>Other documented business activities</h2>
+        <p>
+          The company’s business records describe further activities alongside labour supply.
+          Their current availability depends on the requirement — contact the office to
+          confirm what GLCL provides today.
+        </p>
+      </div>
+      <div class="value-grid" data-reveal>
+        {
+          documentedActivities.map((a) => (
+            <div class="value-card">
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-center" style="margin-top:2rem">
+        <a class="btn btn--outline" href={url('/contact/')}>Ask about availability</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container container--narrow" data-reveal>
       <div class="section-head section-head--center">
         <p class="eyebrow">Before you request</p>
