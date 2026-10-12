@@ -1,0 +1,189 @@
+---
+/**
+ * Animated GLCL logo preloader.
+ * Hand-traced SVG: wheel, dockworker, waves and GLCL wordmark animate in
+ * sequence (~2.1s), then the overlay fades once the page has loaded.
+ * Shows once per browser session; skipped for reduced-motion and no-JS.
+ */
+---
+
+<div id="glcl-preloader" aria-hidden="true">
+  <svg viewBox="0 0 200 200" role="img" aria-hidden="true" focusable="false">
+    <defs>
+      <path id="pl-h" d="M97 30 L96.5 18 C95.5 12 96.5 8 100 7 C103.5 8 104.5 12 103.5 18 L103 30 Z" />
+      <clipPath id="pl-wc">
+        <rect class="pl-wclip" x="30" y="20" width="140" height="160" />
+      </clipPath>
+    </defs>
+
+    <!-- Dock crane, sits behind the wheel -->
+    <g class="pl-crane" stroke="#2e3489" stroke-width="4.5" fill="none" stroke-linecap="round">
+      <path d="M128 33 H196" />
+      <path d="M178 33 V96" />
+      <path d="M178 48 L196 33" />
+      <path d="M144 33 V47" />
+      <rect x="139" y="47" width="10" height="7" rx="1.5" fill="#2e3489" stroke="none" />
+    </g>
+
+    <!-- Ship's wheel: ring + 8 paddle handles, rotates into place -->
+    <g class="pl-wheel">
+      <g fill="#2e3489">
+        <use href="#pl-h" />
+        <use href="#pl-h" transform="rotate(45 100 102)" />
+        <use href="#pl-h" transform="rotate(90 100 102)" />
+        <use href="#pl-h" transform="rotate(135 100 102)" />
+        <use href="#pl-h" transform="rotate(180 100 102)" />
+        <use href="#pl-h" transform="rotate(225 100 102)" />
+        <use href="#pl-h" transform="rotate(270 100 102)" />
+        <use href="#pl-h" transform="rotate(315 100 102)" />
+      </g>
+      <circle cx="100" cy="102" r="72" fill="none" stroke="#2e3489" stroke-width="12" />
+      <circle cx="100" cy="102" r="66" fill="#ffffff" />
+    </g>
+
+    <!-- Dockworker silhouette, revealed bottom-up -->
+    <g clip-path="url(#pl-wc)" class="pl-worker">
+      <!-- vest: chin tab anchors the face; convex shoulders, rounded hem -->
+      <path fill="#2e3489" d="M91 84 H109 V91 C121 93 131 101 136 113 L140 140 Q140.5 144 136 144 H64 Q59.5 144 60 140 L64 113 C69 101 79 93 91 91 Z" />
+      <!-- hard hat dome -->
+      <path fill="#2e3489" d="M82 64 C82 49 90 42 100 42 C110 42 118 49 118 64 Z" />
+      <!-- hard hat brim -->
+      <rect x="73" y="62" width="54" height="8" rx="4" fill="#2e3489" />
+      <!-- reflective stripes -->
+      <g fill="#ffffff">
+        <rect x="77" y="99" width="5" height="15" rx="1" transform="rotate(-20 79.5 106.5)" />
+        <rect x="86.5" y="101" width="5" height="12" rx="1" transform="rotate(-20 89 107)" />
+        <rect x="118" y="99" width="5" height="15" rx="1" transform="rotate(20 120.5 106.5)" />
+        <rect x="108.5" y="101" width="5" height="12" rx="1" transform="rotate(20 111 107)" />
+      </g>
+      <!-- radio on left shoulder -->
+      <rect x="54" y="96" width="9" height="14" rx="1.5" fill="#2e3489" />
+      <path d="M58.5 96 L53 82" stroke="#2e3489" stroke-width="2.4" stroke-linecap="round" />
+    </g>
+
+    <!-- Waves, drawn on stroke by stroke -->
+    <g class="pl-waves" fill="none" stroke="#2e3489" stroke-width="3.2" stroke-linecap="round">
+      <path class="pl-wave pl-wave1" d="M54 146 Q65 140 76 146 T98 146 T120 146 T142 146" />
+      <path class="pl-wave pl-wave2" d="M52 153.5 Q63 147.5 74 153.5 T96 153.5 T118 153.5 T140 153.5" />
+      <path class="pl-wave pl-wave3" d="M56 161 Q67 155 78 161 T100 161 T122 161 T144 161" />
+    </g>
+
+    <!-- Banner + GLCL lettering, last to appear -->
+    <g class="pl-banner">
+      <rect class="pl-card" x="56" y="110" width="88" height="24" rx="3" fill="#ffffff" />
+      <text class="pl-word" x="100" y="127.5" text-anchor="middle" font-size="17.5" font-weight="900" font-family="'Archivo Variable', 'Arial Black', sans-serif" fill="#d0202b" letter-spacing="0.5">GLCL</text>
+    </g>
+  </svg>
+</div>
+
+<noscript>
+  <style>
+    #glcl-preloader { display: none !important; }
+    html:has(#glcl-preloader) { overflow: auto !important; }
+  </style>
+</noscript>
+
+<style is:inline>
+  #glcl-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(ellipse 80% 70% at 50% 45%, #0e1c3f 0%, #08152e 68%);
+    transition: opacity 0.45s ease;
+    animation: pl-autohide 0s linear 3.8s forwards;
+  }
+  #glcl-preloader.is-leaving { opacity: 0; pointer-events: none; }
+  #glcl-preloader svg { width: min(70vmin, 300px); height: auto; display: block; }
+
+  @keyframes pl-autohide { to { visibility: hidden; opacity: 0; } }
+
+  html:has(#glcl-preloader) { overflow: hidden; }
+  html.glcl-skip #glcl-preloader { display: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    #glcl-preloader { display: none !important; }
+    html:has(#glcl-preloader) { overflow: auto; }
+  }
+
+  .pl-crane { animation: pl-fade 0.8s ease-out 0.25s both; }
+
+  .pl-wheel {
+    transform-origin: 100px 102px;
+    transform-box: view-box;
+    animation: pl-wheel-in 1s cubic-bezier(0.22, 0.9, 0.28, 1) both;
+  }
+  @keyframes pl-wheel-in {
+    from { transform: rotate(-42deg); opacity: 0; }
+    30% { opacity: 1; }
+    to { transform: rotate(0deg); opacity: 1; }
+  }
+
+  .pl-worker {
+    animation: pl-rise 0.75s cubic-bezier(0.32, 0.82, 0.32, 1) 0.5s both;
+  }
+  .pl-wclip {
+    transform-origin: 100px 180px;
+    transform-box: view-box;
+    animation: pl-clip-up 0.75s cubic-bezier(0.32, 0.82, 0.32, 1) 0.5s both;
+  }
+  @keyframes pl-rise {
+    from { opacity: 0; transform: translateY(7px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes pl-clip-up {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+
+  .pl-wave {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: pl-draw 0.55s ease-out both;
+  }
+  .pl-wave1 { animation-delay: 1.05s; }
+  .pl-wave2 { animation-delay: 1.2s; }
+  .pl-wave3 { animation-delay: 1.35s; }
+  @keyframes pl-draw { to { stroke-dashoffset: 0; } }
+
+  .pl-card { animation: pl-fade 0.45s ease-out 1.4s both; }
+  .pl-word {
+    transform-origin: 100px 127px;
+    transform-box: view-box;
+    animation: pl-word-in 0.5s cubic-bezier(0.3, 0.9, 0.35, 1) 1.55s both;
+  }
+  @keyframes pl-word-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes pl-fade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('glcl-preloader');
+    if (!el) return;
+    if (document.documentElement.classList.contains('glcl-skip')) {
+      el.remove();
+      return;
+    }
+    try { sessionStorage.setItem('glcl-preloader', '1'); } catch (e) {}
+    var start = Date.now();
+    var MIN = 2400;
+    var MAX = 3100;
+    var FADE = 450;
+    var left = false;
+    function leave() {
+      if (left) return;
+      left = true;
+      el.classList.add('is-leaving');
+      setTimeout(function () { if (el.parentNode) el.remove(); }, FADE + 80);
+    }
+    function go() {
+      setTimeout(leave, Math.max(0, MIN - (Date.now() - start)));
+    }
+    if (document.readyState === 'complete') go();
+    else window.addEventListener('load', go);
+    setTimeout(leave, MAX);
+  })();
+</script>

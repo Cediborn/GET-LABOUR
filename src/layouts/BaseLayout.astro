@@ -4,6 +4,7 @@ import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Preloader from '../components/Preloader.astro';
 import { site, url } from '../config/site';
 
 interface Props {
@@ -69,8 +70,23 @@ const orgSchema = {
 
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} is:inline />
+    <script is:inline>
+      // Gate the logo preloader before first paint: show once per session,
+      // never for reduced-motion users.
+      try {
+        if (
+          sessionStorage.getItem('glcl-preloader') === '1' ||
+          window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ) {
+          document.documentElement.classList.add('glcl-skip');
+        }
+      } catch (e) {
+        document.documentElement.classList.add('glcl-skip');
+      }
+    </script>
   </head>
   <body>
+    <Preloader />
     <a class="skip-link" href="#main">Skip to main content</a>
     <Header currentPath={path} />
     <main id="main">
